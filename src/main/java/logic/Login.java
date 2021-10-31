@@ -19,8 +19,8 @@ public class Login {
 		return dp.getByUser(p);
 	}
 	
-	public LinkedList<Persona> getAll(){
-		return dp.getAll();
+	public LinkedList<Persona> getAll(String rol){
+		return dp.getAll(rol);
 	}
 	
 	public Persona getByDocumento(Persona per) {
