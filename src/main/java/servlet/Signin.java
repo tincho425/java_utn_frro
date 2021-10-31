@@ -47,7 +47,7 @@ public class Signin extends HttpServlet {
 		
 		String passw = request.getParameter("password");
 		// TO DO: validación básica formato password
-		per.setPassword(email);
+		per.setPassword(passw);
 		
 		per = ctrl.validate(per);
 		

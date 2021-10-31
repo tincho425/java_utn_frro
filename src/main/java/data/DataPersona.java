@@ -18,9 +18,9 @@ public class DataPersona {
 		ResultSet rs = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select id,nombre, apellido, tipo_doc, nro_doc, email, tal, habilitado from persona where email=? and password=?");
+					"select id,nombre, apellido, tipo_doc, nro_doc, email, tel, habilitado from persona where email=? and password=?");
 			stmt.setString(1, per.getEmail());
-			stmt.setString(1, per.getPassword());
+			stmt.setString(2, per.getPassword());
 			rs = stmt.executeQuery();
 			if(rs != null && rs.next()){
 				p = new Persona();
