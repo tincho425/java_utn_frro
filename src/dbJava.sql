@@ -40,6 +40,7 @@ CREATE TABLE `persona` (
   `tel` varchar(255) DEFAULT NULL,
   `habilitado` tinyint(1) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,7 +51,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'dni','10101010','Juan','Perez','jp@gmail.com','4101010',1,'jperez'),(2,'dni','12121212','John','Doe','contacto@jd','4121212',0,'jdoe'),(3,'dni','13131313','Nadie','Sabe','ns@ns.com','4131313',1,'nsabe'),(4,'cuit','14141414141','Identidad','Desconocida','unknown@gmail.com','4141414',0,'idesconocida'),(5,'cuit','15151515151','Alguien','Más','am@gmail.com','4151515',1,'amas'),(6,'dni','16161616','Otra','Persona','op@gmail.com','4161616',0,'opersona');
+INSERT INTO `persona` VALUES (1,'dni','10101010','Juan','Perez','jp@gmail.com','4101010',1,'jperez',DEFAULT),(2,'dni','12121212','John','Doe','contacto@jd','4121212',0,'jdoe',DEFAULT),(3,'dni','13131313','Nadie','Sabe','ns@ns.com','4131313',1,'nsabe',DEFAULT),(4,'cuit','14141414141','Identidad','Desconocida','unknown@gmail.com','4141414',0,'idesconocida',DEFAULT),(5,'cuit','15151515151','Alguien','Más','am@gmail.com','4151515',1,'amas',DEFAULT),(6,'dni','16161616','Otra','Persona','op@gmail.com','4161616',0,'opersona',DEFAULT);
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +75,7 @@ CREATE TABLE `rol` (
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` VALUES (1,'admin'),(2,'user');
+INSERT INTO `rol` VALUES (1,'admin'),(2,'agent');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
