@@ -74,7 +74,7 @@ public class Signin extends HttpServlet {
 			 */
 			// TO DO: recuperar rol del usuario.
 			//if(per.getRole() == 'admin')
-			LinkedList<Persona> personas = ctrl.getAll("admin");
+			LinkedList<Persona> personas = ctrl.getAll("agent");
 			// TO DO: filtrar las que sean agentes únicamente (o hacer método exclusivo)
 			request.setAttribute("listaAgentes", personas);
 			request.getRequestDispatcher("WEB-INF/AgenteList.jsp").forward(request, response);
