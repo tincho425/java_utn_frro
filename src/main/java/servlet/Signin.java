@@ -31,8 +31,11 @@ public class Signin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// This method is used to logout
+		System.out.println(request.getSession().getAttribute("usuario"));
+		request.getSession().removeAttribute("usuario");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**

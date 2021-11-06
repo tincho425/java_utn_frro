@@ -31,7 +31,7 @@
 		      </ul>
 		
 		      <div class="col-md-3 text-end">
-		        <button type="button" class="btn btn-outline-primary">Cerrar sesión</button>
+		        <a href="./signin" class="btn btn-outline-primary">Cerrar sesión</a>
 		      </div>
 		    </header>
 		  </div>
