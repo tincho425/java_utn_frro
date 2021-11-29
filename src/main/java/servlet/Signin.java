@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Persona;
+import entities.Usuario;
 import logic.Login;
 
 /**
@@ -43,7 +43,7 @@ public class Signin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Persona per = new Persona();
+		Usuario usu = new Usuario();
 		Login ctrl = new Login();
 		
 		/*
@@ -51,35 +51,35 @@ public class Signin extends HttpServlet {
 		 */
 		String email = request.getParameter("email");
 		// TO DO: validación básica formato email.
-		per.setEmail(email);
+		usu.setEmail(email);
 		
 		/*
 		 * Obtengo la password desde el form
 		 */
 		String passw = request.getParameter("password");
 		// TO DO: validación básica formato password
-		per.setPassword(passw);
+		usu.setPassword(passw);
 		
 		/*
 		 * Intento obtener los usuario con dichas credenciales
 		 */
-		per = ctrl.validate(per);
+		usu = ctrl.validate(usu);
 		
 		/*
 		 * Las credenciales son válidas
 		 */
-		if(per != null) {
+		if(usu != null) {
 			
-			request.getSession().setAttribute("usuario", per);
+			request.getSession().setAttribute("usuario", usu);
 
 			/*
 			 * El usuario logueado es Admin
 			 */
 			// TO DO: recuperar rol del usuario.
 			//if(per.getRole() == 'admin')
-			LinkedList<Persona> personas = ctrl.getAll("agent");
+			LinkedList<Usuario> usuarios = ctrl.getAll("agent");
 			// TO DO: filtrar las que sean agentes únicamente (o hacer método exclusivo)
-			request.setAttribute("listaAgentes", personas);
+			request.setAttribute("listaAgentes", usuarios);
 			request.getRequestDispatcher("WEB-INF/AgenteList.jsp").forward(request, response);
 		}
 

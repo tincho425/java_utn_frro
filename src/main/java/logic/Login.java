@@ -1,29 +1,29 @@
 package logic;
 
-import entities.Persona;
-import data.DataPersona;
+import entities.Usuario;
+import data.DataUsuario;
 import java.util.LinkedList;
 
 public class Login {
-	private DataPersona dp;
+	private DataUsuario du;
 	
 	public Login() {
-		dp = new DataPersona();
+		du = new DataUsuario();
 	}
 	
-	public Persona validate(Persona p) {
+	public Usuario validate(Usuario u) {
 		/* Para hacer más seguro el manejo de passwords este sería un lugar
 		 * adecuado para generar un hash de la password utilizando un cifrado
 		 * asimétrico como sha256 y utilizar el hash en lugar de las password en plano
 		 */
-		return dp.getByUser(p);
+		return du.getByUser(u);
 	}
 	
-	public LinkedList<Persona> getAll(String rol){
-		return dp.getAll(rol);
+	public LinkedList<Usuario> getAll(String rol){
+		return du.getAll(rol);
 	}
 	
-	public Persona getByDocumento(Persona per) {
-		return dp.getByDocumento();
+	public Usuario getByDocumento(Usuario usu) {
+		return du.getByDocumento(usu);
 	}
 }

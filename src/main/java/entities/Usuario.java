@@ -1,6 +1,6 @@
 package entities;
 
-public class Persona {
+public class Usuario {
 	
 	private int id;
 	private String nombre;
@@ -62,7 +62,7 @@ public class Persona {
 	
 	@Override
 	public String toString() {
-		return "\nPersona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", habilitado=" + habilitado
+		return "\nUsuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", habilitado=" + habilitado
 				+ ", documento=" + documento + "]";
 	}
 

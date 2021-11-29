@@ -1,6 +1,6 @@
 package data;
 
-import entities.Persona;
+import entities.Usuario;
 
 public class DataRol {
 
@@ -9,7 +9,7 @@ public class DataRol {
 
 	}
 	
-	public void setRoles(Persona p) {
+	public void setRoles(Usuario p) {
 		
 	}
 
