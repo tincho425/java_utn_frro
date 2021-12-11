@@ -192,9 +192,38 @@ CREATE TABLE `servicio` (
 
 LOCK TABLES `servicio` WRITE;
 /*!40000 ALTER TABLE `servicio` DISABLE KEYS */;
-INSERT INTO `servicio` (nombre, descripcion) VALUES ("Fibra óptica - 100MB","El servicio brinda acceso a internet con velocidades de subida y bajada paralelas de 100MB"),
-("Fibra óptica - 200MB", "El servicio brinda acceso a internet con velocidades de subida y bajada paralelas de 200MB");
+INSERT INTO `servicio` (id, nombre, descripcion) VALUES (1, "Fibra óptica - 100MB","El servicio brinda acceso a internet con velocidades de subida y bajada paralelas de 100MB"),
+(2, "Fibra óptica - 200MB", "El servicio brinda acceso a internet con velocidades de subida y bajada paralelas de 200MB");
 /*!40000 ALTER TABLE `servicio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+--
+-- Table structure for table `llamada_servicio`
+--
+
+DROP TABLE IF EXISTS `llamada_servicio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `llamada_servicio` (
+  `id_llamada` INT NOT NULL,
+  `id_servicio` INT NOT NULL,
+  PRIMARY KEY (`id_llamada`,`id_servicio`),
+  KEY `llamada_servicio_llamada_fk` (`id_llamada`),
+  CONSTRAINT `llamada_servicio_llamada_fk` FOREIGN KEY (`id_llamada`) REFERENCES `llamada` (`id`),
+  CONSTRAINT `llamada_servicio_servicio_fk` FOREIGN KEY (`id_servicio`) REFERENCES `servicio` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `llamada_servicio`
+--
+
+LOCK TABLES `llamada_servicio` WRITE;
+/*!40000 ALTER TABLE `llamada_servicio` DISABLE KEYS */;
+INSERT INTO `llamada_servicio` VALUES (1,1),(2,2),(3,1),(3,2),(4,2),(5,2),(6,2);
+/*!40000 ALTER TABLE `llamada_servicio` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
