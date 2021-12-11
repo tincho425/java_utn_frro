@@ -11,6 +11,15 @@ public class Usuario {
 	private boolean habilitado;
 	private Documento documento;
 	
+	public Usuario() {
+		
+	}
+	
+	public Usuario(Integer id) {
+		super();
+		this.id = id;
+	}
+	
 	public int getId() {
 		return id;
 	}

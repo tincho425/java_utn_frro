@@ -104,4 +104,43 @@ public class DataUsuario {
 		return p;
 	}
 
+	public Usuario getById(Usuario usu) {
+		DataRol dr = new DataRol();
+		Usuario u = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select id,nombre, apellido, tipo_doc, nro_doc, email, tel, habilitado from usuario where id=?");
+			stmt.setInt(1, usu.getId());
+			System.out.println("===================SQL");
+			System.out.println(stmt);
+			rs = stmt.executeQuery();
+			if(rs != null && rs.next()){
+				u = new Usuario();
+				u.setDocumento(new Documento());
+				u.setId(rs.getInt("id"));
+				u.setNombre(rs.getString("nombre"));
+				u.setApellido(rs.getString("apellido"));
+				u.getDocumento().setTipo(rs.getString("tipo_doc"));
+				u.getDocumento().setNro(rs.getString("nro_doc"));
+				u.setEmail(rs.getString("email"));
+				u.setTel(rs.getString("tel"));
+				u.setHabilitado(rs.getBoolean("habilitado"));
+				dr.setRoles(u);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) { rs.close(); }
+				if(stmt != null) { stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return u;
+	}
+
 }

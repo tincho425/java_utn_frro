@@ -26,4 +26,9 @@ public class Login {
 	public Usuario getByDocumento(Usuario usu) {
 		return du.getByDocumento(usu);
 	}
+	
+	public Usuario getById(Usuario usu) {
+		return du.getById(usu);
+	}
+
 }
