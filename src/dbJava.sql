@@ -150,6 +150,8 @@ CREATE TABLE `llamada` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`timestamp_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`timestamp_ended` TIMESTAMP NULL DEFAULT NULL,
+	`remitente` varchar(255) DEFAULT NULL,
+	`nota` varchar(255) DEFAULT NULL,
 	`id_usuario` int(11) NOT NULL,
 	`id_cliente` INT(8) DEFAULT NULL,
 	PRIMARY KEY (`id`),
@@ -164,7 +166,8 @@ CREATE TABLE `llamada` (
 
 LOCK TABLES `llamada` WRITE;
 /*!40000 ALTER TABLE `llamada` DISABLE KEYS */;
-INSERT INTO `llamada` (id_usuario) VALUES (1);
+INSERT INTO `llamada` (id, id_usuario, id_cliente, remitente) VALUES (1, 1, 39120610, NULL), (2, 1, 39120610, NULL), (3, 2, 39120611, NULL),
+(4, 2, 39120610, NULL), (5, 3, 39120611, NULL), (6, 3, 39120611, NULL), (7, 3, 39120610, NULL), (8, 3, 39120611, NULL), (9, 3, NULL, '+543416295949'), (10, 1, NULL, '+543415203923');
 /*!40000 ALTER TABLE `llamada` ENABLE KEYS */;
 UNLOCK TABLES;
 
