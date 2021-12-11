@@ -14,7 +14,7 @@
 	    <li><a href="./clientes" class="nav-link ${currentPage == 'clientes' ? 'active px-2' : '' }">Clientes</a></li>
 	    <li><a href="./servicios" class="nav-link">Servicios</a></li>
 	    <li><a href="#" class="nav-link">Ventas</a></li>
-	    <li><a href="#" class="nav-link">Llamados</a></li>
+	    <li><a href="./llamados" class="nav-link">Llamados</a></li>
 	  </ul>
 	
 	  <div class="col-md-3 text-end">
