@@ -9,20 +9,20 @@ import entities.Cliente;
 
 public class DataCliente {
 
-	public Cliente getByUser(Cliente cli) {
+	public Cliente getByDni(Cliente cli) {
 		Cliente c = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"select dni, apellido, nombre, CUIT, telefono, email from cliente where dni=?");
-			stmt.setInt(1, c.getDni());
+			stmt.setInt(1, cli.getDni());
 			rs = stmt.executeQuery();
 			if(rs != null && rs.next()){
 				c = new Cliente();
 				c.setDni(rs.getInt("dni"));
-				c.setNombre(rs.getString("apellido"));
 				c.setNombre(rs.getString("nombre"));
+				c.setApellido(rs.getString("apellido"));
 				c.setCUIT(rs.getInt("CUIT"));
 				c.setTelefono(rs.getString("telefono"));
 				c.setEmail(rs.getString("email"));

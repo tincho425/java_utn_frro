@@ -9,6 +9,15 @@ public class Cliente {
 	private String telefono;
 	private String email;
 	
+	public Cliente() {
+	
+	}
+	
+	public Cliente(Integer dni) {
+		super();
+		this.dni = dni;
+	}
+	
 	public int getDni() {
 		return dni;
 	}
