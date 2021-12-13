@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,13 +31,13 @@ public class Signin extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// This method is used to logout
 		System.out.println(request.getSession().getAttribute("usuario"));
 		request.getSession().removeAttribute("usuario");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-	}
+	}*/
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -70,17 +71,19 @@ public class Signin extends HttpServlet {
 		 */
 		if(usu != null) {
 			
+			//setting session to expiry in 30 mins
 			request.getSession().setAttribute("usuario", usu);
+			
+			Cookie userName = new Cookie("userName", usu.getNombre());
+			userName.setMaxAge(30*60);
+			response.addCookie(userName);
 
-			/*
-			 * El usuario logueado es Admin
-			 */
-			// TO DO: recuperar rol del usuario.
-			//if(per.getRole() == 'admin')
+
 			LinkedList<Usuario> usuarios = ctrl.getAll("agent");
-			// TO DO: filtrar las que sean agentes únicamente (o hacer método exclusivo)
 			request.setAttribute("listaAgentes", usuarios);
+			//response.sendRedirect("./agentes");
 			request.getRequestDispatcher("WEB-INF/AgenteList.jsp").forward(request, response);
+			
 		}
 
 	}
