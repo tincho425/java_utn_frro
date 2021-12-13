@@ -48,14 +48,22 @@ public class DataLlamada {
 	
 	public Boolean insert(Llamada l, String[] servicios) {
 		PreparedStatement stmt = null;
-		ResultSet rs = null;
+		Integer rs = null;
 		try {
-			String query = "insert into llamada (id, timestamp_created, remitente, nota, id_usuario, id_cliente) values (?, ?, ?, ?, ?, ?)";
-			stmt.setInt(1, cli.getDni());
+			String query = "insert into llamada (timestamp_created, remitente, nota, id_usuario, id_cliente) values (?, ?, ?, ?, ?)";
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(query);
+			stmt.setTimestamp(1, l.getTimestamp_created());
+			stmt.setString(2, l.getRemitente());
+			stmt.setString(3, l.getNota());
+			stmt.setInt(4, l.getId_usuario());
+			if(l.getId_cliente() != null)
+				stmt.setInt(5, l.getId_cliente());
+			else
+				stmt.setNull(5, java.sql.Types.INTEGER);
+			
 			System.out.println("===================SQL");
 			System.out.println(stmt);
-			rs = stmt.executeQuery();
+			rs = stmt.executeUpdate();
 			
 			// Add servicios to recent created Llamada
 			
@@ -63,7 +71,6 @@ public class DataLlamada {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(rs != null) { rs.close(); }
 				if(stmt != null) { stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {

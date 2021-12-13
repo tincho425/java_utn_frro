@@ -1,4 +1,6 @@
 <%@page import="java.util.LinkedList"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.sql.Timestamp"%>
 <%@page import="entities.Usuario"%>
 <%@page import="entities.Cliente"%>
 <%@page import="entities.Servicio"%>
@@ -17,7 +19,11 @@
 	    	LinkedList<Cliente> lc = (LinkedList<Cliente>) request.getAttribute("listaClientes");
 	    	LinkedList<Servicio> ls = (LinkedList<Servicio>) request.getAttribute("listaServicios");
 	    	request.setAttribute("currentPage", "nueva-llamada");
-	    	Boolean entrante = request.getParameter("entrante") != null;
+	    	String remitente = request.getParameter("remitente");
+	    	Boolean entrante = remitente != null;
+	    	
+    	  Date date = new Date();
+    	  Timestamp timestamp = new Timestamp(date.getTime());
 	    	
 	    %>
 	</head>
@@ -28,9 +34,11 @@
 	
 		<main class="container">
 			<form action="#" method="post" class="row justify-content-center text-start">
-				<input type="hidden" name="timestamp_created">
+				<input type="hidden" name="id_usuario" value="<%= u.getId() %>">
+				<input type="hidden" name="timestamp_created" value="<%= timestamp %>">
+				<input type="hidden" name="remitente" value="<%= remitente %>">
 				<div class="col-6 row g-3 justify-content-end">
-					<h3>Nueva llamada - <%= entrante ? "Entrante" : "Saliente" %></h3>
+					<h3>Nueva llamada - <%= entrante ? "Entrante (+" + remitente + ")" : "Saliente" %></h3>
 					<div class="">
 						<label for="nota" class="form-label">Notas</label>
 						<textarea class="form-control" id="nota" name="notas" rows="3"></textarea>

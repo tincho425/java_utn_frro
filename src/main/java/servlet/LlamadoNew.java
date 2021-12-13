@@ -2,6 +2,10 @@ package servlet;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,12 +61,37 @@ public class LlamadoNew extends HttpServlet {
 		System.out.println("Hola POST");
 		Llamada l = new Llamada();
 		LlamadaLogic lctrl = new LlamadaLogic();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		
+		
+		String timestamp_c = request.getParameter("timestamp_created");
+		
+		Date parsedDate;
+		try {
+			parsedDate = dateFormat.parse(timestamp_c);
+			Timestamp timestamp_created = new java.sql.Timestamp(parsedDate.getTime());
+			l.setTimestamp_created(timestamp_created);
+		} catch (ParseException e) {
+			System.out.println(timestamp_c);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		String notas = request.getParameter("notas");
 		String cliente = request.getParameter("cliente");
+		String remitente = request.getParameter("remitente");
+		String id_usuario = request.getParameter("id_usuario");
+		System.out.println("+++++++++++++++++" + id_usuario);
 		String[] servicios = request.getParameterValues("servicios");
+		
 		l.setNota(notas);
-		l.setId_cliente(Integer.parseInt(cliente));
+		l.setId_usuario(Integer.parseInt(id_usuario));
+		if(cliente != null)
+			l.setId_cliente(Integer.parseInt(cliente));
+		else {
+			l.setRemitente(remitente);
+		}
 		System.out.println(l);
 		System.out.println(servicios);
 		

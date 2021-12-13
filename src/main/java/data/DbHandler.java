@@ -12,8 +12,6 @@ import java.time.LocalTime;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import entities.Product;
-
 public class DbHandler {
 
 	private Connection conn = null;

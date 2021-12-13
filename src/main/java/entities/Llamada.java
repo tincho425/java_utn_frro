@@ -57,6 +57,10 @@ public class Llamada {
 		this.id_cliente = id_cliente;
 	}
 	
+	public Integer getId_usuario() {
+		return id_usuario;
+	}
+	
 	public void setId_usuario(Integer id_usuario) {
 		this.id_usuario = id_usuario;
 	}
@@ -95,7 +99,7 @@ public class Llamada {
 
 	@Override
 	public String toString() {
-		return "\nLlamada [id=" + id + ", nota=" + nota +", timestamp_created=" + timestamp_created + ", timestamp_ended=" + timestamp_ended + ", remitente=" + remitente + "]";
+		return "\nLlamada [id=" + id + ", id_usuario="+ id_usuario +", nota=" + nota +", timestamp_created=" + timestamp_created + ", timestamp_ended=" + timestamp_ended + ", remitente=" + remitente + "]";
 	}
 
 }
