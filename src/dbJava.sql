@@ -149,7 +149,7 @@ DROP TABLE IF EXISTS `llamada`;
 CREATE TABLE `llamada` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`timestamp_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`timestamp_ended` TIMESTAMP NULL DEFAULT NULL,
+	`timestamp_ended` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 	`remitente` varchar(255) DEFAULT NULL,
 	`nota` varchar(255) DEFAULT NULL,
 	`id_usuario` int(11) NOT NULL,
