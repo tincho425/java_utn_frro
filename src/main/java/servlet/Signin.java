@@ -74,9 +74,9 @@ public class Signin extends HttpServlet {
 			//setting session to expiry in 30 mins
 			request.getSession().setAttribute("usuario", usu);
 			
-			Cookie userName = new Cookie("userName", usu.getNombre());
-			userName.setMaxAge(30*60);
-			response.addCookie(userName);
+			Cookie userID = new Cookie("user", String.valueOf(usu.getId()));
+			userID.setMaxAge(30*60);
+			response.addCookie(userID);
 
 
 			LinkedList<Usuario> usuarios = ctrl.getAll("agent");

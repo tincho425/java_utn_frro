@@ -95,9 +95,13 @@ public class LlamadoNew extends HttpServlet {
 		System.out.println(l);
 		System.out.println(servicios);
 		
-		if(servicios != null) {
-			lctrl.insert(l, servicios);
-		}
+		
+		lctrl.insert(l, servicios);
+		
+		LinkedList<Llamada> lls = lctrl.getAll();
+		request.setAttribute("listaLlamadas", lls);
+		request.getRequestDispatcher("WEB-INF/LlamadaList.jsp").forward(request, response);
+		
 	}
 
 }
