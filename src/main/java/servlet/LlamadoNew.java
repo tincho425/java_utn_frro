@@ -82,7 +82,6 @@ public class LlamadoNew extends HttpServlet {
 		String cliente = request.getParameter("cliente");
 		String remitente = request.getParameter("remitente");
 		String id_usuario = request.getParameter("id_usuario");
-		System.out.println("+++++++++++++++++" + id_usuario);
 		String[] servicios = request.getParameterValues("servicios");
 		
 		l.setNota(notas);
@@ -92,8 +91,6 @@ public class LlamadoNew extends HttpServlet {
 		else {
 			l.setRemitente(remitente);
 		}
-		System.out.println(l);
-		System.out.println(servicios);
 		
 		
 		lctrl.insert(l, servicios);

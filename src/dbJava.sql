@@ -154,6 +154,7 @@ CREATE TABLE `llamada` (
 	`nota` varchar(255) DEFAULT NULL,
 	`id_usuario` int(11) NOT NULL,
 	`id_cliente` INT(8) DEFAULT NULL,
+	`eliminado` BOOLEAN NOT NULL DEFAULT FALSE,
 	PRIMARY KEY (`id`),
 	CONSTRAINT `llamada_usuario_fk` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
 	CONSTRAINT `llamada_cliente_fk` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`dni`)

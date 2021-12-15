@@ -17,7 +17,7 @@ public class DataLlamada {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
-			String query = "select * from llamada";
+			String query = "select * from llamada where eliminado = FALSE";
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(query);
 			System.out.println("===================SQL");
 			System.out.println(stmt);
@@ -116,6 +116,31 @@ public class DataLlamada {
 			}
 		}
 		return true;
+	}
+
+	public Boolean delete(Llamada l) {
+		Llamada ll = null;
+		PreparedStatement stmt = null;
+		int rs = 0;
+		try {
+			String query = "update llamada set eliminado = 1 where id = ?";
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, l.getId());
+			System.out.println("===================SQL");
+			System.out.println(stmt);
+			rs = stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if(stmt != null) { stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

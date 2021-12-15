@@ -45,6 +45,16 @@ public class LlamadoList extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		Llamada l = new Llamada();
+		LlamadaLogic lctrl = new LlamadaLogic();
+		Integer id_llamada = Integer.valueOf(request.getParameter("id_llamada"));
+		l.setId(id_llamada);
+		lctrl.delete(l);
+		
+		LinkedList<Llamada> lls = lctrl.getAll();
+		request.setAttribute("listaLlamadas", lls);
+		request.getRequestDispatcher("WEB-INF/LlamadaList.jsp").forward(request, response);
 		
 	}
 }

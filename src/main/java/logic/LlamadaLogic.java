@@ -18,5 +18,9 @@ public class LlamadaLogic {
 	public Boolean insert(Llamada l, String[] servicios) {
 		return dl.insert(l, servicios);
 	}
+
+	public Boolean delete(Llamada l) {
+		return dl.delete(l);
+	}
 	
 }
