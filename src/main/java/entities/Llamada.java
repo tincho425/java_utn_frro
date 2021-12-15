@@ -67,13 +67,15 @@ public class Llamada {
 
 	public String getRemitente() {
 		String remitenteString = ""; 
-		if(this.remitente != null) {
+		if(this.remitente != null && this.remitente != "") {
 			remitenteString = this.remitente;
-		} else {
+		} else if ( this.id_cliente != null ){
+
 			ClienteLogic ctrl = new ClienteLogic();
 			Cliente cl = new Cliente(this.id_cliente);
 			cl = ctrl.getByDni(cl);
-			remitenteString = cl.getNombre();
+			remitenteString = cl.getNombre() + " " + cl.getApellido();
+			
 		}
 		return remitenteString;
 	}

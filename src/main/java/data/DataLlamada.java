@@ -79,7 +79,11 @@ public class DataLlamada {
 			String query = "insert into llamada (timestamp_created, remitente, nota, id_usuario, id_cliente) values (?, ?, ?, ?, ?)";
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 			stmt.setTimestamp(1, l.getTimestamp_created());
-			stmt.setString(2, l.getRemitente());
+			if(l.getRemitente() != null && l.getRemitente() != "")
+				stmt.setString(2, l.getRemitente());
+			else
+				stmt.setNull(2, java.sql.Types.NULL);
+			//stmt.setString(2, l.getRemitente());
 			stmt.setString(3, l.getNota());
 			stmt.setInt(4, l.getId_usuario());
 			if(l.getId_cliente() != null)
