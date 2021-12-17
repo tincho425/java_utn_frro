@@ -17,6 +17,13 @@ public class Llamada {
 	private Integer id_cliente;
 	private Integer id_usuario;
 
+	public Llamada() {}
+	
+	public Llamada(Integer id) {
+		super();
+		this.id = id;
+	}
+	
 	public int getId() {
 		return id;
 	}

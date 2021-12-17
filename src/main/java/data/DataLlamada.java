@@ -147,4 +147,73 @@ public class DataLlamada {
 		}
 	}
 
+	public Llamada getById(Llamada l) {
+		Llamada ll = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			String query = "select * from llamada where eliminado = FALSE and id = ?";
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(query);
+			stmt.setInt(1, l.getId());
+			System.out.println("===================SQL");
+			System.out.println(stmt);
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				ll = new Llamada();
+				ll.setId(rs.getInt("id"));
+				ll.setRemitente(rs.getString("remitente"));
+				ll.setNota(rs.getString("nota"));
+				ll.setTimestamp_created(rs.getTimestamp("timestamp_created"));
+				ll.setTimestamp_ended(rs.getTimestamp("timestamp_ended"));
+				ll.setId_usuario(rs.getInt("id_usuario"));
+				ll.setId_cliente(rs.getInt("id_cliente"));
+				
+				return ll;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) { rs.close(); }
+				if(stmt != null) { stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return ll;
+	}
+
+	public Boolean update(Llamada l, String[] servicios) {
+		Llamada ll = null;
+		PreparedStatement stmt = null;
+		int rs = 0;
+		try {
+			String query = "update llamada set"
+					+ " timestamp_created = ?, remitente = ?, nota = ?, id_usuario = ?, id_cliente = ?"
+					+ " where id = ?";
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+			stmt.setTimestamp(1, l.getTimestamp_created());
+			stmt.setString(2, l.getRemitente());
+			stmt.setString(3, l.getNota());
+			stmt.setInt(4, l.getId_usuario());
+			stmt.setInt(5, l.getId_cliente());
+			stmt.setInt(6, l.getId());
+			System.out.println("===================SQL");
+			System.out.println(stmt);
+			rs = stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if(stmt != null) { stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

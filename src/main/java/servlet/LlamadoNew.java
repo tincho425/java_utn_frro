@@ -65,18 +65,21 @@ public class LlamadoNew extends HttpServlet {
 		
 		
 		String timestamp_c = request.getParameter("timestamp_created");
+		String id_edit = request.getParameter("editing");
+		Boolean editando = id_edit != null;
 		
 		Date parsedDate;
-		try {
-			parsedDate = dateFormat.parse(timestamp_c);
-			Timestamp timestamp_created = new java.sql.Timestamp(parsedDate.getTime());
-			l.setTimestamp_created(timestamp_created);
-		} catch (ParseException e) {
-			System.out.println(timestamp_c);
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		if(!editando) {
+			try {
+				parsedDate = dateFormat.parse(timestamp_c);
+				Timestamp timestamp_created = new java.sql.Timestamp(parsedDate.getTime());
+				l.setTimestamp_created(timestamp_created);
+			} catch (ParseException e) {
+				System.out.println(timestamp_c);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}		
 		
 		String notas = request.getParameter("notas");
 		String cliente = request.getParameter("cliente");
@@ -92,8 +95,13 @@ public class LlamadoNew extends HttpServlet {
 			l.setRemitente(remitente);
 		}
 		
+		if(!editando) {
+			lctrl.insert(l, servicios);
+		} else {
+			l.setId(Integer.valueOf(id_edit));
+			lctrl.update(l, servicios);
+		}
 		
-		lctrl.insert(l, servicios);
 		
 		LinkedList<Llamada> lls = lctrl.getAll();
 		request.setAttribute("listaLlamadas", lls);

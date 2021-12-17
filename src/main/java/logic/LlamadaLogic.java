@@ -15,6 +15,10 @@ public class LlamadaLogic {
 		return dl.getAll();
 	}
 	
+	public Llamada getById(Llamada l){
+		return dl.getById(l);
+	}
+	
 	public Boolean insert(Llamada l, String[] servicios) {
 		return dl.insert(l, servicios);
 	}
@@ -22,5 +26,10 @@ public class LlamadaLogic {
 	public Boolean delete(Llamada l) {
 		return dl.delete(l);
 	}
+
+	public Boolean update(Llamada l, String[] servicios) {
+		return dl.update(l, servicios);		
+	}
+
 	
 }
