@@ -84,6 +84,7 @@ public class DataUsuario {
 				u.setEmail(rs.getString("email"));
 				u.setTel(rs.getString("tel"));
 				u.setHabilitado(rs.getBoolean("habilitado"));
+				u.setFechaCreado(rs.getTimestamp("created_at"));
 				usuarios.add(u);
 			}
 		} catch (SQLException e) {

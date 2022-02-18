@@ -1,5 +1,7 @@
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Usuario"%>
+<%@page import="java.text.SimpleDateFormat" %>
+<%@page import="java.util.Date" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,6 +25,7 @@
 	
 		<main class="container">
 		  <div class="table-responsive">
+		 	<pre><%= la.getFirst() %></pre>
 	        <table class="table table-striped table-sm">
 	          <thead>
 	            <tr>
@@ -37,7 +40,11 @@
 	            </tr>
 	          </thead>
 	          <tbody>
-	          	<% for (Usuario agent : la) { %>
+	          	<% for (Usuario agent : la) {
+	          		SimpleDateFormat formatDateServer = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+	          		SimpleDateFormat rightFormatDateServer = new SimpleDateFormat("dd-M-yyyy");
+	          		Date fechaCreadoDate = formatDateServer.parse(agent.getFechaCreado().toString());
+	          		%>
 		            <tr>
 		              <td><%=agent.getId()%></td>
 		              <td><%=agent.getNombre() + ' ' + agent.getApellido()%></td>
@@ -46,7 +53,7 @@
 		              <td>
 		              	<input class="form-check-input" type="checkbox" <%=agent.isHabilitado() ? "checked" : "" %>>
 					  </td>
-		              <td>🔜</td>
+		              <td><%= rightFormatDateServer.format(fechaCreadoDate) %></td>
 		              <td>🔜</td>
 		              <td>🔜</td>
 		            </tr>

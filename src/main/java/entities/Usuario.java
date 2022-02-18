@@ -1,5 +1,7 @@
 package entities;
 
+import java.sql.Timestamp;
+
 public class Usuario {
 	
 	private int id;
@@ -10,6 +12,7 @@ public class Usuario {
 	private String password;
 	private boolean habilitado;
 	private Documento documento;
+	private Timestamp fecha_creado;
 	
 	public Usuario() {
 		
@@ -69,10 +72,18 @@ public class Usuario {
 		this.password = pw;
 	}
 	
+	public Timestamp getFechaCreado() {
+		return fecha_creado;
+	}
+
+	public void setFechaCreado(Timestamp fecha_creado) {
+		this.fecha_creado = fecha_creado;
+	}
+
 	@Override
 	public String toString() {
 		return "\nUsuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", habilitado=" + habilitado
-				+ ", documento=" + documento + "]";
+				+ ", created_at=" + fecha_creado + ", documento=" + documento + "]";
 	}
 
 }
