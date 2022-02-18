@@ -49,6 +49,7 @@ public class Llamada {
 	}
 
 	public Timestamp getTimestamp_ended() {
+		// Localdatetime ZoneDateTime
 		return timestamp_ended;
 	}
 

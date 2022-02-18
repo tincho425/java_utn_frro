@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>LLamadas</title>
+		<title>Llamadas</title>
 		
 		<!-- Bootstrap -->
 	    <link href="assets/style/bootstrap.min.css" rel="stylesheet">
