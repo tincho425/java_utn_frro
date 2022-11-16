@@ -39,6 +39,7 @@ public class ClienteList extends HttpServlet {
 		LinkedList<Cliente> clientes = ctrl.getAll();
 		// TO DO: filtrar las que sean agentes únicamente (o hacer método exclusivo)
 		request.setAttribute("listaClientes", clientes);
+		request.setAttribute("currentPage", "clientes");
 		request.getRequestDispatcher("WEB-INF/ClienteList.jsp").forward(request, response);
 	}
 
