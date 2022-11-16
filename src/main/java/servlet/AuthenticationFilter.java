@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.Usuario;
+
 @WebFilter("/AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
 
@@ -29,19 +31,26 @@ public class AuthenticationFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		
+		if(req.getMethod() != "GET") {
+			chain.doFilter(request, response);
+			return;
+		}
+		
 		String uri = req.getRequestURI();
 		this.context.log("Requested Resource::"+uri);
 		
 		HttpSession session = req.getSession(false);
-		if(session == null &&
-				!(uri.endsWith("html") || uri.endsWith("Signin") || uri.endsWith("css") || uri.endsWith("svg") || uri.endsWith("js"))){
-			this.context.log("Unauthorized access request");
-			res.sendRedirect("login.html");
-		}else{
-			// pass the request along the filter chain
+		if(session != null && session.getAttribute("usuario") != null) { // Maybe allow assets URL here?
 			chain.doFilter(request, response);
-		}
-		
+		} else {
+			this.context.log("!uri.endsWith(\"login.html\")"+ Boolean.toString(!uri.endsWith("login.html"))+" "+uri);
+			if(!uri.endsWith("login.html") && !uri.endsWith(".css") && !uri.endsWith(".svg")) { // Don't redirect if it's already at login
+				this.context.log("Unauthorized access request");
+				res.sendRedirect("login.html");
+			} else {
+				chain.doFilter(request, response);
+			}
+		}		
 		
 	}
 
