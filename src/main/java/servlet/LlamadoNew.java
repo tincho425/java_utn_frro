@@ -42,13 +42,47 @@ public class LlamadoNew extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		ClienteLogic ctrl = new ClienteLogic();
-		LinkedList<Cliente> clientes = ctrl.getAll();
+		ClienteLogic cctrl = new ClienteLogic();
 		ServicioLogic sctrl = new ServicioLogic();
+		Cliente cl = new Cliente();		
+		
 		LinkedList<Servicio> servicios = sctrl.getAll();
-		// TO DO: filtrar las que sean agentes únicamente (o hacer método exclusivo)
-		request.setAttribute("listaClientes", clientes);
+		Usuario u = (Usuario) request.getSession().getAttribute("usuario");
+		String idEdit = request.getParameter("edit");
+		String clienteDni = request.getParameter("cliente");
+		
+		Boolean editando = idEdit != null;
+		Boolean altaIngresa = clienteDni != null;
 		request.setAttribute("listaServicios", servicios);
+		
+		// Case editando llamada
+		if(editando) {
+			Llamada l = new Llamada();
+			
+			LlamadaLogic lctrl = new LlamadaLogic();
+			l.setId(Integer.valueOf(idEdit));
+    		l = lctrl.getById(l);
+    		cl.setDni(l.getId_cliente());
+    		cl = cctrl.getByDni(cl);
+    		
+    		request.getSession().setAttribute("llamada", l);
+    		request.getSession().setAttribute("cliente", cl);
+    		
+			request.getRequestDispatcher("WEB-INF/LlamadoNew.jsp").forward(request, response);
+			return;
+		} else if (altaIngresa) {
+			cl = new Cliente(Integer.parseInt(clienteDni));
+			cl = cctrl.getByDni(cl);
+		}
+
+		
+		
+		// TO DO: filtrar las que sean agentes únicamente (o hacer método exclusivo)
+		
+		
+		request.getSession().setAttribute("cliente", cl);
+		request.setAttribute("usuario", u);
+		
 		request.getRequestDispatcher("WEB-INF/LlamadoNew.jsp").forward(request, response);
 		
 	}

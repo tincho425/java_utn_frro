@@ -20,9 +20,8 @@
 	    
 	    <%
 	    	
-	    	
-	    	LinkedList<Cliente> lc = (LinkedList<Cliente>) request.getAttribute("listaClientes");
 	    	LinkedList<Servicio> ls = (LinkedList<Servicio>) request.getAttribute("listaServicios");
+	    	
 	    	request.setAttribute("currentPage", "nueva-llamada");
 	    	String remitente = request.getParameter("remitente");
 	    	Boolean entrante = remitente != null;
@@ -30,25 +29,23 @@
 	    	String id_edit = request.getParameter("edit");
 	    	Boolean editando = id_edit != null;
 	    	
+	    	Cliente cl = new Cliente();
 	    	Usuario u = new Usuario();
 	    	Llamada l = new Llamada();
 	    			
 	    	if(editando){
 	    		Login uctrl = new Login();
-	    		LlamadaLogic lctrl = new LlamadaLogic();
-	    		l.setId(Integer.valueOf(id_edit));
-	    		l = lctrl.getById(l);
+
+	    		l = (Llamada) request.getSession().getAttribute("llamada");
+	    		cl = (Cliente) request.getSession().getAttribute("cliente");
+	    		
 	    		u.setId(l.getId_usuario());
 
 	    		u = uctrl.getById(u);
-	    		/*
-	    		l = lctrl.getById(l);
-	    		Usuario u = new Usuario(l.getId_cliente());
-	    		u.setDocumento(documento)
-	    		u = uctrl.getById(usu)
-	    		*/
+
 	    	} else {
-	    		u = (Usuario)session.getAttribute("usuario");
+	    		cl = (Cliente) request.getSession().getAttribute("cliente");
+	    		u = (Usuario)request.getAttribute("usuario");
 	    	}
 		    	
 			Date date = new Date();
@@ -70,23 +67,16 @@
 					<input type="hidden" name="editing" value="1" />
 				<% } %>
 				<div class="col-6 row g-3 justify-content-end">
-					<h3>Nueva llamada - <%= entrante ? "Entrante (+" + remitente + ")" : "Saliente" %></h3>
+					<h3><%= editando ? "Editar llamada" : "Nueva llamada"  %>
+						<%= entrante ? remitente : "" %>
+						- <%= editando ?
+								"Entrante (" + cl.getNombre() + " "+ cl.getApellido() +")"
+								: "Saliente" %>
+					</h3>
 					<div class="">
 						<label for="nota" class="form-label">Notas</label>
 						<textarea class="form-control" id="nota" name="notas" rows="3"><%= editando && l.getNota() != null ? l.getNota() : "" %></textarea>
 					</div>
-					<% if(!entrante) { %>
-					<div class="">
-						<label for="cliente" class="form-label">Cliente</label>
-						<select class="form-select" aria-label="Listado clientes" id="cliente" name="cliente" <%= editando ? "value='"+l.getId_cliente()+"'" : "" %>>
-							<option selected disabled>Seleccione el cliente</option>
-							<% for (Cliente client : lc) { %>
-							<option value="<%=client.getDni() %>"
-								<%= editando && client.getDni() == l.getId_cliente() ? "selected" : "" %>><%=client.getNombre() + " " + client.getApellido() %></option>
-							<% } %>
-						</select>
-					</div>
-					<% } %>
 					<div class="">
 						<label for="servicios" class="form-label">Servicio</label>
 						<select class="form-select" aria-label="Listado de servicio" multiple id="servicios" name="servicios">
