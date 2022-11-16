@@ -17,6 +17,8 @@ public class DataCliente {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"select dni, apellido, nombre, CUIT, telefono, email from cliente where dni=?");
 			stmt.setInt(1, cli.getDni());
+			System.out.println("===================SQL");
+			System.out.println(stmt);
 			rs = stmt.executeQuery();
 			if(rs != null && rs.next()){
 				c = new Cliente();
@@ -35,7 +37,7 @@ public class DataCliente {
 				if(stmt != null) { stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				e.printStackTrace(); // Agregar manejo de excepciones
 			}
 		}
 		return c;
@@ -74,6 +76,39 @@ public class DataCliente {
 			}
 		}
 		return clientes;
+	}
+	
+	public Boolean insert(Cliente cli) {
+		PreparedStatement stmt = null;
+		Integer rs = null;
+		try {
+			String query = "insert into cliente (dni, nombre, apellido,"
+					+ "cuit, telefono, email) values (?,?,?,?,?,?)";
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(query);
+			stmt.setInt(1, cli.getDni());
+			stmt.setString(2, cli.getNombre());
+			stmt.setString(3, cli.getApellido());
+			stmt.setInt(4, cli.getCUIT());
+			stmt.setString(5, cli.getTelefono());
+			stmt.setString(6, cli.getEmail());
+			
+			System.out.println("===================SQL");
+			System.out.println(stmt);
+			rs = stmt.executeUpdate();
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if(stmt != null) { stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
 	}
 
 }

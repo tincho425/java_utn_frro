@@ -14,7 +14,7 @@
 	    <%
 	    	Usuario u = (Usuario)session.getAttribute("usuario");
 	    	LinkedList<Cliente> lc = (LinkedList<Cliente>) request.getAttribute("listaClientes");
-	    	request.setAttribute("currentPage", "clientes");
+	    	
 	    %>
 	</head>
 	<body class="text-center">

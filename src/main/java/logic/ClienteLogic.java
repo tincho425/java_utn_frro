@@ -23,5 +23,8 @@ public class ClienteLogic {
 		return dc.getAll();
 	}
 	
+	public Boolean insert(Cliente c) {
+		return dc.insert(c);
+	}
 	
 }
