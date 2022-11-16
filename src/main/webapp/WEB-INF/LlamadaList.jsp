@@ -14,7 +14,6 @@
 	    <%
 	    	Usuario u = (Usuario)session.getAttribute("usuario");
 	    	LinkedList<Llamada> ll = (LinkedList<Llamada>) request.getAttribute("listaLlamadas");
-	    	request.setAttribute("currentPage", "llamadas");
 	    %>
 	</head>
 	<body class="text-center">

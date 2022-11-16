@@ -38,6 +38,7 @@ public class LlamadoList extends HttpServlet {
 		LlamadaLogic lctrl = new LlamadaLogic();
 		LinkedList<Llamada> lls = lctrl.getAll();
 		request.setAttribute("listaLlamadas", lls);
+		request.setAttribute("currentPage", "llamados");
 		request.getRequestDispatcher("WEB-INF/LlamadaList.jsp").forward(request, response);
 	}
 
