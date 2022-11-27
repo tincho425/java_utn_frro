@@ -35,7 +35,10 @@ public class DbConnector {
 	public Connection getConn() {
 		try {
 			if(conn==null || conn.isClosed()) {
-				conn=DriverManager.getConnection("jdbc:mysql://localhost/martin-java_callcenter?user=290076&password=tincho123&serverTimezone=UTC");
+				String dbHost = System.getenv("DB_HOST");
+				String connectionString = "jdbc:mysql://"+dbHost+"/martin-java_callcenter?user=290076&password=tincho123&serverTimezone=UTC";
+				System.out.println("---connectionString: "+connectionString);
+				conn=DriverManager.getConnection(connectionString);
 				conectados=0;
 			}
 		} catch (SQLException e) {
