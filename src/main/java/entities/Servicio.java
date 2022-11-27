@@ -5,6 +5,15 @@ public class Servicio {
 	private int id;
 	private String nombre, descripcion;
 	
+	public Servicio() {
+		
+	}
+	
+	public Servicio(Integer id) {
+		super();
+		this.id = id;
+	}
+	
 	public int getId() {
 		return id;
 	}

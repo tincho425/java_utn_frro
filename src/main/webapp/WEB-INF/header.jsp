@@ -38,7 +38,7 @@
 	  <ul class="nav nav-pills">
 	    <li class="nav-item"><a href="./agentes" class="nav-link ${currentPage == 'agentes' ? 'active px-2' : ''}">Agentes</a></li>
 	    <li><a href="./clientes" class="nav-link ${currentPage == 'clientes' ? 'active px-2' : '' }">Clientes</a></li>
-	    <li><a href="./servicios" class="nav-link">Servicios</a></li>
+	    <li><a href="./servicios" class="nav-link ${currentPage == 'servicios' ? 'active px-2' : '' }">Servicios</a></li>
 	    <li><a href="#" class="nav-link">Ventas</a></li>
 	    <li><a href="./llamados" class="nav-link ${currentPage == 'llamados' ? 'active px-2' : '' }"">Llamados</a></li>
 	  </ul>

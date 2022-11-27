@@ -183,6 +183,7 @@ CREATE TABLE `servicio` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`nombre` varchar(255) NOT NULL,
 	`descripcion` varchar(255) DEFAULT NULL,
+	`eliminado` BOOLEAN NOT NULL DEFAULT FALSE,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -193,8 +194,8 @@ CREATE TABLE `servicio` (
 
 LOCK TABLES `servicio` WRITE;
 /*!40000 ALTER TABLE `servicio` DISABLE KEYS */;
-INSERT INTO `servicio` (id, nombre, descripcion) VALUES (1, "Fibra óptica - 100MB","El servicio brinda acceso a internet con velocidades de subida y bajada paralelas de 100MB"),
-(2, "Fibra óptica - 200MB", "El servicio brinda acceso a internet con velocidades de subida y bajada paralelas de 200MB");
+INSERT INTO `servicio` (id, nombre, descripcion, eliminado) VALUES (1, "Fibra óptica - 100MB","El servicio brinda acceso a internet con velocidades de subida y bajada paralelas de 100MB", 0),
+(2, "Fibra óptica - 200MB", "El servicio brinda acceso a internet con velocidades de subida y bajada paralelas de 200MB", 0);
 /*!40000 ALTER TABLE `servicio` ENABLE KEYS */;
 UNLOCK TABLES;
 

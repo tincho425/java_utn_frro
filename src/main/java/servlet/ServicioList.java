@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Cliente;
-import entities.Usuario;
-import logic.ClienteLogic;
-import logic.Login;
+import entities.Servicio;
+import logic.ServicioLogic;
 
 /**
  * Servlet implementation class Signin
@@ -35,58 +33,25 @@ public class ServicioList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		ClienteLogic ctrl = new ClienteLogic();
-		LinkedList<Cliente> clientes = ctrl.getAll();
-		// TO DO: filtrar las que sean agentes únicamente (o hacer método exclusivo)
-		request.setAttribute("listaClientes", clientes);
-		request.getRequestDispatcher("WEB-INF/ClienteList.jsp").forward(request, response);
+		ServicioLogic ctrl = new ServicioLogic();
+		LinkedList<Servicio> servicios = ctrl.getAll();
+		request.setAttribute("listaServicios", servicios);
+		request.getRequestDispatcher("WEB-INF/ServicioList.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Usuario usu = new Usuario();
-		Login ctrl = new Login();
+		ServicioLogic ctrl = new ServicioLogic();
+		Servicio s = new Servicio();
+		Integer id_servicio = Integer.valueOf(request.getParameter("id_servicio"));
+		s.setId(id_servicio);
+		ctrl.delete(s);
 		
-		/*
-		 *  Obtengo el email desde el form
-		 */
-		String email = request.getParameter("email");
-		// TO DO: validación básica formato email.
-		usu.setEmail(email);
-		
-		/*
-		 * Obtengo la password desde el form
-		 */
-		String passw = request.getParameter("password");
-		// TO DO: validación básica formato password
-		usu.setPassword(passw);
-		
-		/*
-		 * Intento obtener los usuario con dichas credenciales
-		 */
-		usu = ctrl.validate(usu);
-		
-		/*
-		 * Las credenciales son válidas
-		 */
-		if(usu != null) {
-			
-			request.getSession().setAttribute("usuario", usu);
-
-			/*
-			 * El usuario logueado es Admin
-			 */
-			// TO DO: recuperar rol del usuario.
-			//if(per.getRole() == 'admin')
-			LinkedList<Usuario> usuarios = ctrl.getAll("agent");
-			// TO DO: filtrar las que sean agentes únicamente (o hacer método exclusivo)
-			request.setAttribute("listaAgentes", usuarios);
-			request.getRequestDispatcher("WEB-INF/AgenteList.jsp").forward(request, response);
-		}
-
+		LinkedList<Servicio> servicios = ctrl.getAll();
+		request.setAttribute("listaServicios", servicios);
+		request.getRequestDispatcher("WEB-INF/ServicioList.jsp").forward(request, response);
 	}
 
 }

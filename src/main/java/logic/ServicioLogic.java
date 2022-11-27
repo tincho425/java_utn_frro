@@ -16,4 +16,20 @@ public class ServicioLogic {
 		return ds.getAll();
 	}
 	
+	public Servicio getById(Servicio s){
+		return ds.getById(s);
+	}
+	
+	public Boolean insert(Servicio s){
+		return ds.insert(s);
+	}
+	
+	public Boolean update(Servicio s){
+		return ds.update(s);
+	}
+	
+	public Boolean delete(Servicio s) {
+		return ds.delete(s);
+	}
+	
 }
