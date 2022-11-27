@@ -44,7 +44,7 @@ public class AuthenticationFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			this.context.log("!uri.endsWith(\"login.html\")"+ Boolean.toString(!uri.endsWith("login.html"))+" "+uri);
-			if(!uri.endsWith("login.html") && !uri.endsWith(".css") && !uri.endsWith(".svg")) { // Don't redirect if it's already at login
+			if(!uri.endsWith("login.html") && !uri.endsWith(".css") && !uri.endsWith(".svg") && !uri.endsWith(".png")) { // Don't redirect if it's already at login
 				this.context.log("Unauthorized access request");
 				res.sendRedirect("login.html");
 			} else {
