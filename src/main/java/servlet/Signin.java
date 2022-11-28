@@ -16,7 +16,7 @@ import logic.Login;
 /**
  * Servlet implementation class Signin
  */
-@WebServlet({ "/signin", "/SIGNIN", "/Signin", "/signIn", "/", "/login" })
+@WebServlet({ "/signin", "/SIGNIN", "/Signin", "/signIn", "/login" })
 public class Signin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
