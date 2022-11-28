@@ -54,7 +54,6 @@ public class ClienteSelection extends HttpServlet {
 			Integer dni = Integer.parseInt(request.getParameter("dni"));
 			String nombre = request.getParameter("nombre");
 			String apellido = request.getParameter("apellido");
-			System.out.println("--------------" + request.getParameter("cuit"));
 			Integer cuit = Integer.parseInt(request.getParameter("cuit"));
 			String telefono = request.getParameter("telefono");
 			String email = request.getParameter("email");
@@ -83,7 +82,16 @@ public class ClienteSelection extends HttpServlet {
 		Cliente cl = new Cliente();
 		ClienteLogic cctrl = new ClienteLogic();
 		
-		cl.setDni(Integer.parseInt(dni));
+		try {
+			cl.setDni(Integer.parseInt(dni));
+		} catch (NumberFormatException e) {
+			System.out.println("DNI inválido --> " + e.toString());
+			String path = request.getContextPath() + "/cliente-consulta?remitente="
+					+request.getParameter("remitente")
+					+"&error=Formato de DNI incorrecto";
+			response.sendRedirect(path);
+			return;
+		}
 		
 		cl = cctrl.getByDni(cl);
 		

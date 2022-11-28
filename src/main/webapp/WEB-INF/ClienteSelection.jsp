@@ -19,6 +19,7 @@
 	    <link href="assets/style/bootstrap.min.css" rel="stylesheet">
 	    
 	    <%
+	    	String error = request.getParameter("error");
 	    	String remitente = request.getParameter("remitente");
 	    	// If `cliente` is set, it's the use case of unexisting cliente.
 	    	String cliente = request.getParameter("cliente");
@@ -44,10 +45,15 @@
 						<%= (!isCreatingCliente) ? "Consultar" : "Alta" %>
 						 cliente - <%= "Entrante (+" + remitente + ")" %>
 					</h3>
+					<% if(error != null) { %>
+					<div class="alert alert-warning" role="alert">
+					  <%= error %>
+					</div>
+					<% } %>
 					<div class="mb-1">
 					  <label for="dni" class="form-label">DNI *</label>
 					  <input type="number" class="form-control" id="dni" placeholder="Ingrese DNI"
-					  	name="dni" <%= (isCreatingCliente) ? "value=\""+cliente+"\"": "" %> required>
+					  	name="dni" <%= (isCreatingCliente) ? "value=\""+cliente+"\" disabled": "" %> required>
 					</div>
 					<% if (isCreatingCliente){ %>
 	                <div class="mb-1">

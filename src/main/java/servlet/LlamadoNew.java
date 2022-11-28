@@ -91,8 +91,6 @@ public class LlamadoNew extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("Hola POST");
 		Llamada l = new Llamada();
 		LlamadaLogic lctrl = new LlamadaLogic();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
