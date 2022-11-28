@@ -29,6 +29,8 @@
 	    	String id_edit = request.getParameter("edit");
 	    	Boolean editando = id_edit != null;
 	    	
+	    	String id_cliente = request.getParameter("cliente");
+	    	
 	    	Cliente cl = new Cliente();
 	    	Usuario u = new Usuario();
 	    	Llamada l = new Llamada();
@@ -63,6 +65,9 @@
 				<input type="hidden" name="id_usuario" value="<%= u.getId() %>">
 				<input type="hidden" name="timestamp_created" value="<%= timestamp %>">
 				<input type="hidden" name="remitente" value="<%= remitente %>">
+				<% if(id_cliente != null){ %>
+					<input type="hidden" name="cliente" value="<%= id_cliente %>" />
+				<% } %>
 				<%if(editando) {%>
 					<input type="hidden" name="editing" value="1" />
 				<% } %>
