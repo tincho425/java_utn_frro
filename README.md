@@ -9,7 +9,7 @@ La propuesta para la realización del Trabajo Práctica Integrador es un sistema
 |:-|-:|-:|:-|
 |ABMC simple|1 x integ|1 x integ|Cliente y Servicio vendible
 |ABMC dependiente|1|2|Llamada
-|CU NO-ABMC|1|2|Registro de nueva llamada
+|CU NO-ABMC|1|2|Llamada entrante sin cliente registrado
 |Listado simple|1|3(*)|Clientes en el sistema
 |Listado complejo|0|1(*)|Reclamos resueltos de un operario
 
