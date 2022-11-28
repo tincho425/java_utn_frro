@@ -16,7 +16,7 @@ import logic.Login;
 /**
  * Servlet implementation class Signin
  */
-@WebServlet({ "/signin", "/SIGNIN", "/Signin", "/signIn" })
+@WebServlet({ "/signin", "/SIGNIN", "/Signin", "/signIn", "/", "/login" })
 public class Signin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,13 +31,9 @@ public class Signin extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	/*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// This method is used to logout
-		System.out.println(request.getSession().getAttribute("usuario"));
-		request.getSession().removeAttribute("usuario");
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-	}*/
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -84,6 +80,8 @@ public class Signin extends HttpServlet {
 			//response.sendRedirect("./agentes");
 			request.getRequestDispatcher("WEB-INF/AgenteList.jsp").forward(request, response);
 			
+		} else {
+			response.sendRedirect("./login?invalid-login=1");
 		}
 
 	}

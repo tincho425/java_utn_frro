@@ -43,8 +43,10 @@ public class AuthenticationFilter implements Filter {
 		if(session != null && session.getAttribute("usuario") != null) { // Maybe allow assets URL here?
 			chain.doFilter(request, response);
 		} else {
-			this.context.log("!uri.endsWith(\"login.html\")"+ Boolean.toString(!uri.endsWith("login.html"))+" "+uri);
-			if(!uri.endsWith("login.html") && !uri.endsWith(".css") && !uri.endsWith(".svg") && !uri.endsWith(".png")) { // Don't redirect if it's already at login
+			Boolean isLogin = uri.equals("/javaTPCC/login") || uri.equals("/javaTPCC/login.html") || uri.equals("/javaTPCC/");
+			if(!isLogin
+					&& !uri.endsWith(".css") && !uri.endsWith(".svg") && !uri.endsWith(".png") && !uri.endsWith(".js")
+					) { // Don't redirect if it's already at login
 				this.context.log("Unauthorized access request");
 				res.sendRedirect("login.html");
 			} else {
