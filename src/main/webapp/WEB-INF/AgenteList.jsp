@@ -25,7 +25,6 @@
 	
 		<main class="container">
 		  <div class="table-responsive">
-		 	<pre><%= la.getFirst() %></pre>
 	        <table class="table table-striped table-sm">
 	          <thead>
 	            <tr>
@@ -51,7 +50,7 @@
 		              <td><%=agent.getEmail()%></td>
 		              <td><%=agent.getTel()%></td>
 		              <td>
-		              	<input class="form-check-input" type="checkbox" <%=agent.isHabilitado() ? "checked" : "" %>>
+		              	<input class="form-check-input" type="checkbox" <%=agent.isHabilitado() ? "checked" : "" %> disabled>
 					  </td>
 		              <td><%= rightFormatDateServer.format(fechaCreadoDate) %></td>
 		              <td>🔜</td>
