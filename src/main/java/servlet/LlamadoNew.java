@@ -70,9 +70,13 @@ public class LlamadoNew extends HttpServlet {
     		
 			request.getRequestDispatcher("WEB-INF/LlamadoNew.jsp").forward(request, response);
 			return;
-		} else if (altaIngresa) {
+		} else if (altaIngresa) { // Caso alta-ingresa
 			cl = new Cliente(Integer.parseInt(clienteDni));
 			cl = cctrl.getByDni(cl);
+		} else { // Caso alta-egresa
+			LinkedList<Cliente> clientes = cctrl.getAll();
+			request.getSession().setAttribute("clientes", cl);
+			request.getRequestDispatcher("WEB-INF/LlamadoNew.jsp").forward(request, response);
 		}
 
 		
